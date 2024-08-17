@@ -13,7 +13,7 @@ from torch.utils.data import Dataset, DataLoader
 import torch
 import unicodedata
 
-frames = 29
+frames = 25
 fps = 25
 
 jpeg = TurboJPEG()
