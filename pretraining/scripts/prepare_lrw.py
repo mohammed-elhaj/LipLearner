@@ -65,7 +65,7 @@ class LRWDataset(Dataset):
     def __getitem__(self, idx):
         inputs = extract_opencv(self.list[idx][0])
         result = {}        
-        print(idx)
+        # print(idx)
         name = self.list[idx][0]
         duration = self.list[idx][0]            
         labels = self.list[idx][1]
@@ -89,7 +89,6 @@ class LRWDataset(Dataset):
             next(reader)  # Skip header
 
             for row in reader:
-                print(row[3])
                 if row[3] == target_word:
                     end = float(row[1])  # Get 'end' value
                     start = float(row[2])  # Get 'start' value
