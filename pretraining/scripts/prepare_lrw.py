@@ -11,12 +11,18 @@ import cv2
 import os
 from torch.utils.data import Dataset, DataLoader
 import torch
+import unicodedata
+
+frames = 29
+fps = 25
 
 jpeg = TurboJPEG()
 def extract_opencv(filename):
     video = []
     cap = cv2.VideoCapture(filename)
     while(cap.isOpened()):
+        if len(video) > frames:
+          break
         ret, frame = cap.read() # BGR
         if ret:
             # frame = frame[115:211, 79:175]
@@ -57,10 +63,9 @@ class LRWDataset(Dataset):
             
         
     def __getitem__(self, idx):
-            
         inputs = extract_opencv(self.list[idx][0])
         result = {}        
-         
+        print(idx)
         name = self.list[idx][0]
         duration = self.list[idx][0]            
         labels = self.list[idx][1]
@@ -68,21 +73,23 @@ class LRWDataset(Dataset):
                     
         result['video'] = inputs
         result['label'] = int(labels)
-        result['duration'] = self.load_duration(duration.replace('.mp4', '.csv'),self.labels[idx])
-        savename = self.list[idx][0].replace('train', target_dir).replace('.mp4', '.pkl')
+        result['duration'] = self.load_duration(duration.replace('.mp4', '.csv'),self.labels[labels])
+        # savename = self.list[idx][0].replace('train', target_dir).replace('.mp4', '.pkl')
         torch.save(result, savename)
-        
+        print(savename)
         return result
 
     def __len__(self):
         return len(self.list)
 
     def load_duration(self, file, target_word):
-        with open(file, 'r') as f:
+        duration = 0
+        with open(file, 'r', encoding='utf-8') as f:
             reader = csv.reader(f)
             next(reader)  # Skip header
 
             for row in reader:
+                print(row[3])
                 if row[3] == target_word:
                     end = float(row[1])  # Get 'end' value
                     start = float(row[2])  # Get 'start' value
@@ -90,10 +97,12 @@ class LRWDataset(Dataset):
                     duration = end - start  # Calculate duration
                     break  # Stop after finding the first match
         
-        tensor = np.zeros(29)
-        mid = 29 / 2
-        start_idx = int(mid - duration / 2 * 25)
-        end_idx = int(mid + duration / 2 * 25)
+        tensor = np.zeros(frames)
+        if duration == 0:
+            retrun tensor
+        mid = frames / 2
+        start_idx = int(mid - duration / 2 * fps)
+        end_idx = int(mid + duration / 2 * fps)
         tensor[start_idx:end_idx] = 1.0
     
         return tensor         
