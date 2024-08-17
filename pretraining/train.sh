@@ -7,10 +7,10 @@ python main_visual.py \
     --shaking_prob=0.2 \
     --max_magnitude=0.07 \
     --test=False \
-    --n_dimention=500 \
+    --n_dimention=100 \
     --temperture=0.07 \
     --save_prefix='checkpoints/' \
-    --dataset='/mnt/c/Users/amade/Documents/Development/lipreading_dataset/model_training/lrw/lrw_roi_63_99_191_227_size128_npy_gray_pkl_jpeg' \
-    --weights='LipLearner_pretrained_model.pt' \
+    --dataset='/content/LipLearner/pretraining/LRW-AR/lrw_roi_63_99_191_227_size128_gray_jpeg' \
+    --weights='/content/LipLearner/pretraining/LRW-AR/lrw-border-se-mixup-label-smooth-cosine-lr-wd-1e-4-acc-0.88460.pt' \
     
  
