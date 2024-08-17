@@ -78,17 +78,22 @@ class LRWDataset(Dataset):
 
     def load_duration(self, file):
         with open(file, 'r') as f:
-            lines = f.readlines()
-            for line in lines:
-                if(line.find('Duration') != -1):
-                    duration = float(line.split(' ')[1])
+            reader = csv.reader(f)
+            next(reader)  # Skip header
+            first_row = next(reader)  # Read first data row
+        
+            end = float(first_row[1])  # Get 'end' value
+            start = float(first_row[2])  # Get 'start' value
+        
+            duration = end - start  # Calculate duration
         
         tensor = np.zeros(29)
         mid = 29 / 2
-        start = int(mid - duration / 2 * 25)
-        end = int(mid + duration / 2 * 25)
-        tensor[start:end] = 1.0
-        return tensor            
+        start_idx = int(mid - duration / 2 * 25)
+        end_idx = int(mid + duration / 2 * 25)
+        tensor[start_idx:end_idx] = 1.0
+    
+        return tensor           
 
 if(__name__ == '__main__'):
     loader = DataLoader(LRWDataset(),
