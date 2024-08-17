@@ -109,7 +109,7 @@ class LRWDataset(Dataset):
 if(__name__ == '__main__'):
     loader = DataLoader(LRWDataset(),
             batch_size = 96, 
-            num_workers = 2,   
+            num_workers = 16,   
             shuffle = False,         
             drop_last = False)
     
