@@ -74,9 +74,9 @@ class LRWDataset(Dataset):
         result['video'] = inputs
         result['label'] = int(labels)
         result['duration'] = self.load_duration(duration.replace('.mp4', '.csv'),self.labels[labels])
-        # savename = self.list[idx][0].replace('train', target_dir).replace('.mp4', '.pkl')
+        savename = self.list[idx][0].replace('train', target_dir).replace('.mp4', '.pkl')
         torch.save(result, savename)
-        print(savename)
+        # print(savename)
         return result
 
     def __len__(self):
@@ -99,7 +99,7 @@ class LRWDataset(Dataset):
         
         tensor = np.zeros(frames)
         if duration == 0:
-            retrun tensor
+            return tensor
         mid = frames / 2
         start_idx = int(mid - duration / 2 * fps)
         end_idx = int(mid + duration / 2 * fps)
