@@ -58,12 +58,12 @@ def HorizontalFlip(batch_img):
     return batch_img
 
 def RandomFrameDrop(batch_img, duration):
-    remaining_list = range(29)
+    remaining_list = range(25)
     if random.random() > 0.5:
-        drop_margin = int((29 - duration.sum() * 0.8 ) / 2) 
+        drop_margin = int((25 - duration.sum() * 0.8 ) / 2) 
         drop_start = random.randint(0, drop_margin) 
         drop_end = random.randint(0, drop_margin)
-        remaining_list = np.r_[drop_start:29-drop_end]
+        remaining_list = np.r_[drop_start:25-drop_end]
         batch_img = batch_img[remaining_list] 
     return batch_img, remaining_list
     
