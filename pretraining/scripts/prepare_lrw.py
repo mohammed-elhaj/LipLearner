@@ -21,7 +21,7 @@ def extract_opencv(filename):
     video = []
     cap = cv2.VideoCapture(filename)
     while(cap.isOpened()):
-        if len(video) = frames:
+        if len(video) == frames:
           break
         ret, frame = cap.read() # BGR
         if ret:
