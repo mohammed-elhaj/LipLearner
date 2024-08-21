@@ -52,15 +52,15 @@ class LRWDataset_MyAug(Dataset):
         inputs = tensor.get('video')
         inputs = [jpeg.decode(img, pixel_format=TJPF_GRAY) for img in inputs]
         inputs = np.stack(inputs, 0) / 255.0
-        batch_img = inputs[:,:,:,0] # 29, h, w
+        batch_img = inputs[:,:,:,0] # 25, h, w
         
-        remaining_list = range(29)
+        remaining_list = range(25)
         if('train' in self.phases):
             batch_img = RandomDistort(batch_img, self.args.max_magnitude)
             batch_img, remaining_list = RandomFrameDrop(batch_img, tensor.get('duration'))
             batch_img = RandomCrop(batch_img, shaking_prob=self.args.shaking_prob)
             batch_img = HorizontalFlip(batch_img) # prob 0.5
-            batch_img = torch.FloatTensor(batch_img[:,np.newaxis,...]) # 29, 1 (C), h, w
+            batch_img = torch.FloatTensor(batch_img[:,np.newaxis,...]) # 25, 1 (C), h, w
             batch_img = self.color_jitter(batch_img)
         else:
             batch_img = CenterCrop(batch_img, (88, 88))
@@ -83,8 +83,8 @@ class LRWDataset_MyAug(Dataset):
                 if(line.find('Duration') != -1):
                     duration = float(line.split(' ')[1])
         
-        tensor = torch.zeros(29)
-        mid = 29 / 2
+        tensor = torch.zeros(25)
+        mid = 25 / 2
         start = int(mid - duration / 2 * 25)
         end = int(mid + duration / 2 * 25)
         tensor[start:end] = 1.0
