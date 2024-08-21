@@ -49,9 +49,9 @@ class LRWDataset(Dataset):
         self.list = []
 
         for (i, label) in enumerate(self.labels):
-            files = glob.glob(os.path.join('train', label, '*.mp4'))
+            files = glob.glob(os.path.join('LRW-AR', label, '*', '*.mp4'))
             for file in files:
-                savefile = file.replace('train', target_dir).replace('.mp4', '.pkl')
+                savefile = file.replace('LRW-AR', target_dir).replace('.mp4', '.pkl')
                 savepath = os.path.split(savefile)[0]
                 if(not os.path.exists(savepath)):
                     os.makedirs(savepath)
@@ -74,7 +74,7 @@ class LRWDataset(Dataset):
         result['video'] = inputs
         result['label'] = int(labels)
         result['duration'] = self.load_duration(duration.replace('.mp4', '.csv'),self.labels[labels])
-        savename = self.list[idx][0].replace('train', target_dir).replace('.mp4', '.pkl')
+        savename = self.list[idx][0].replace('LRW-AR', target_dir).replace('.mp4', '.pkl')
         torch.save(result, savename)
         # print(savename)
         return result
