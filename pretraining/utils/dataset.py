@@ -19,7 +19,7 @@ class LRWDataset_MyAug(Dataset):
         self.labels = os.listdir(args.dataset)       
         self.color_jitter = torchvision.transforms.ColorJitter(0.3,0.3,0.3) 
 
-        data_list = [[] for _ in range(500)]
+        data_list = [[] for _ in range(100)]
         self.phases = phases      
         self.args = args
 
@@ -30,7 +30,7 @@ class LRWDataset_MyAug(Dataset):
         
         self.paired_data_list = []
         while True:
-            r = list(range(500))
+            r = list(range(100))
             random.shuffle(r)
             cnt = 0
             temp_file_list = []
@@ -41,7 +41,7 @@ class LRWDataset_MyAug(Dataset):
                     cnt+=1
                 else:
                     break
-            if cnt < 500: # not enough data for 500 classes
+            if cnt < 100: # not enough data for 100 classes
                 break
             else:
                 self.paired_data_list += temp_file_list
