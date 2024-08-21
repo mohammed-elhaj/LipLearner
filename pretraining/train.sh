@@ -10,7 +10,7 @@ python main_visual.py \
     --n_dimention=100 \
     --temperture=0.07 \
     --save_prefix='checkpoints/' \
-    --dataset='/content/LipLearner/pretraining/LRW-AR/lrw_roi_63_99_191_227_size128_gray_jpeg' \
+    --dataset= '/content/LipLearner/pretraining/lrw_roi_63_99_191_227_size128_gray_jpeg' \
     --weights='/content/LipLearner/pretraining/lrw-border-se-mixup-label-smooth-cosine-lr-wd-1e-4-acc-0.88460.pt' \
     
  
