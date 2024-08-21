@@ -43,7 +43,7 @@ if(not os.path.exists(target_dir)):
 class LRWDataset(Dataset):
     def __init__(self):
 
-        with open('sorted_labels.txt') as myfile:
+        with open('LRW-AR/sorted_labels.txt') as myfile:
             self.labels = myfile.read().splitlines()            
         
         self.list = []
@@ -109,7 +109,7 @@ class LRWDataset(Dataset):
 if(__name__ == '__main__'):
     loader = DataLoader(LRWDataset(),
             batch_size = 96, 
-            num_workers = 16,   
+            num_workers = 2,   
             shuffle = False,         
             drop_last = False)
     
