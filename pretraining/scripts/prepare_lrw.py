@@ -99,9 +99,8 @@ class LRWDataset(Dataset):
         tensor = np.zeros(frames)
         if duration == 0:
             return tensor
-        mid = frames / 2
-        start_idx = int(mid - duration / 2 * fps)
-        end_idx = int(mid + duration / 2 * fps)
+        start_idx = int(start * fps)
+        end_idx = int(end * fps)
         tensor[start_idx:end_idx] = 1.0
     
         return tensor         
