@@ -210,6 +210,7 @@ def train():
                             }, savename)       
                     if valid_loss < best_loss or np.isnan(best_loss):
                         shutil.copy(savename, savename.replace('last.pt', 'best.pt'))
+                        shutil.copy(savename, '/content/drive/MyDrive/best.pt')
                         best_loss = valid_loss    
                         print('best loss updated to {:.5f}'.format(best_loss))
                         scheduler.step(valid_loss)    
