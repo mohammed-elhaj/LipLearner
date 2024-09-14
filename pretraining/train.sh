@@ -1,7 +1,7 @@
 python main_visual.py \
     --gpus='0'  \
     --lr=2e-5 \
-    --batch_size=500 \
+    --batch_size=100 \
     --num_workers=12 \
     --max_epoch=60 \
     --shaking_prob=0.2 \
