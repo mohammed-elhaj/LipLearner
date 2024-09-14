@@ -208,7 +208,7 @@ def train():
                             {
                                 'video_model': video_model.state_dict(),
                             }, savename)       
-                    if valid_loss < best_loss or np.isnan(best_loss):
+                    if valid_loss.cpu().item() < best_loss or np.isnan(best_loss):
                         shutil.copy(savename, savename.replace('last.pt', 'best.pt'))
                         best_loss = valid_loss    
                         print('best loss updated to {:.5f}'.format(best_loss))
