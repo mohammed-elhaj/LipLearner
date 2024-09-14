@@ -73,7 +73,7 @@ class LRWDataset(Dataset):
                     
         result['video'] = inputs
         result['label'] = int(labels)
-        result['duration'] = self.load_duration(duration.replace('.mp4', '.csv'),self.labels[labels])
+        result['duration'] = self.load_duration(duration.replace('.mp4', '.csv'),self.labels[labels]).astype(bool)
         savename = self.list[idx][0].replace('LRW-AR', target_dir).replace('.mp4', '.pkl')
         torch.save(result, savename)
         # print(savename)
