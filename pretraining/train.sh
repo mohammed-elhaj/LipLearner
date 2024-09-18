@@ -7,7 +7,7 @@ python main_visual.py \
     --shaking_prob=0.2 \
     --max_magnitude=0.07 \
     --test=False \
-    --n_dimention=100 \
+    --n_dimention=500 \
     --temperture=0.07 \
     --save_prefix='checkpoints/' \
     --dataset='/content/LipLearner/pretraining/lrw_roi_63_99_191_227_size128_gray_jpeg' \
